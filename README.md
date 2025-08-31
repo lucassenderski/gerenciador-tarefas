@@ -2,17 +2,19 @@
 Implementação de uma API de Tarefas 
 
 Create Task
-This endpoint allows you to create a new task in the system. 
+This endpoint allows you to create a new task in the system. It is designed for task management applications where users can track their tasks and responsibilities.
 Request
 Method: POST
 URL: http://localhost:8080/tarefas
 Content-Type: application/json
 
+Purpose
+The purpose of this request is to submit a new task to the system, which will be stored for future reference and management.
 Request Body Parameters
 The request body should be a JSON object containing the following parameters:
-nome (string): The name of the task you want to create. 
-dataEntrega (string): The due date for the task in the format YYYY-MM-DD.
-responsavel (string): The name of the person responsible for the task.
+nome (string): The name of the task you want to create. This should be a brief description of the task.
+dataEntrega (string): The due date for the task, formatted as YYYY-MM-DD. This indicates when the task is expected to be completed.
+responsavel (string): The name of the person responsible for the task. This helps in identifying who is accountable for the task.
 
 Example Request Body:
 
@@ -21,37 +23,37 @@ JSON
 
 
 {
-  "nome": "Estudar Spring Boot",
-  "dataEntrega": "2025-09-01",
-  "responsavel": "Lucas"
+        "nome": "Desenvolvimento da API",
+        "responsavel": "Lucas 4758862",
+        "dataEntrega": "12/12/2025"
 }
 
 
 Response
 Upon a successful request, the server will respond with a status code of 200 and a JSON object containing the following fields:
-id (integer): The unique identifier for the newly created task.
-nome (string): The name of the task.
-dataEntrega (string): The due date of the task.
-responsavel (string): The name of the person responsible for the task.
+id (integer): The unique identifier for the newly created task. This ID can be used for future reference to the task.
+nome (string): The name of the task as provided in the request.
+dataEntrega (string): The due date of the task as provided in the request.
+responsavel (string): The name of the person responsible for the task as provided in the request.
 
 Example Response:
 
 
 JSON
 
+
 {
-  "id": 0,
-  "nome": "",
-  "dataEntrega": "",
-  "responsavel": ""
+  "id":11,
+  "nome": "Desenvolvimento da API",
+  "responsavel": "Lucas 4758862",
+  "dataEntrega": "12/12/2025"
 }
 
 
 Notes
-Ensure that all required fields are provided in the request body.
-The response will include the details of the created task, including its unique ID.
-This endpoint is useful for task management applications where users can track their tasks and responsibilities.
-
+Ensure that all required fields are provided in the request body to avoid errors.
+The response will include the details of the created task, including its unique ID, which can be used for further operations such as updates or deletions.
+This endpoint is essential for managing tasks effectively, allowing users to add and track their responsibilities within the application.
 
 
 Update Task
@@ -91,20 +93,6 @@ responsavel (string): The updated name of the person responsible for the task.
 dataEntrega (string): The updated due date for the task.
 
 
-Example Response:
-
-
-JSON
-
-
-{
-  "id": 0,
-  "nome": "",
-  "responsavel": "",
-  "dataEntrega": ""
-}
-
-
 Notes
 Ensure that the task ID in the URL corresponds to an existing task; otherwise, the update will not be processed.
 The response will reflect the updated task details based on the provided request body.
@@ -127,36 +115,23 @@ nome (string): The name of the task.
 responsavel (string): The person responsible for the task.
 dataEntrega (string): The due date for the task.
 
-Example response:
-
-
-JSON
-[
-    {
-        "id": 0,
-        "nome": "",
-        "responsavel": "",
-        "dataEntrega": ""
-    }
-]
-
 
 This endpoint does not require any parameters and will return an empty array if no tasks are available.
 
-DELETE Tarefa
-This endpoint is used to delete a specific task (tarefa) identified by its unique ID from the system. The request is sent to the specified URL, where the ID of the task to be deleted is included in the path.
+Delete Task
+This endpoint allows you to delete a specific task identified by its unique ID. In this case, the task with ID 9 is being targeted for deletion.
 Request
 Method: DELETE
-URL: http://localhost:8080/tarefas/{id}
+Endpoint: http://localhost:8080/tarefas/9
 
-Path Parameter
-id (required): The unique identifier of the task you want to delete. In the example provided, the ID is 9.
+Headers
+Content-Type: application/json
 
 Request Body
-The request body should be in JSON format, containing the following fields:
+The request body must be in JSON format and can include the following parameters:
 nome (string): The name associated with the task.
-email (string): The email of the user related to the task.
-fone (string): The phone number associated with the task.
+email (string): The email address related to the task.
+fone (string): The phone number linked to the task.
 
 Example Request Body:
 
@@ -164,16 +139,43 @@ Example Request Body:
 JSON
 
 {
-  "nome": "Lucas Frank Senderski",
-  "email": "lucasfsenderski@gmail.com",
-  "fone": "(45) 988241374"
+  "nome": "Desenvolvimento da API",
+  "responsavel": "Lucas Frank Senderski 4758862",
+  "dataEntrega": "12/12/2025"
 }
 
 
 Response
-Upon successful deletion of the task, the server responds with:
-Status Code: 200 OK indicating that the request was successful.
-Content-Type: text/xml, although the body may not contain any content (null).
+Upon successful deletion, the API will return:
+Status: 200 OK
+Content-Type: text/xml
+Body: The response body may not contain any additional information.
 
-Usage
-To effectively use this DELETE request, ensure that you provide the correct ID in the URL and include the necessary fields in the request body. A successful response indicates that the task has been deleted from the system.
+Notes
+Ensure that the task ID in the endpoint corresponds to an existing task to avoid errors.
+The response indicates a successful deletion, but no content will be returned in the body.
+
+This endpoint is used to delete a specific task (tarefa) identified by its unique ID. In this case, the task with ID 9 will be removed from the system.
+Request
+Method: DELETE
+URL: http://localhost:8080/tarefas/9
+
+Request Body
+The request body should be in JSON format and includes the following parameters:
+nome (string): The name associated with the task.
+email (string): The email address related to the task.
+fone (string): The phone number linked to the task.
+
+Example Payload:
+
+
+JSON
+
+{
+  "nome": "Desenvolvimento da API",
+  "responsavel": "Lucas Frank Senderski 4758862",
+  "dataEntrega": "12/12/2025"
+}
+
+
+
